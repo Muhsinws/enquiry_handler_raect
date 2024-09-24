@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import ChatWebSocket from './ChatWebSocket';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+
+    return (
+        <Router>
+            <nav>
+                <Link to="/chat-1/">Go to Chat 1</Link>
+                <br />
+                <Link to="/chat-2/">Go to Chat 2</Link>
+            </nav>
+
+            <Routes>
+                <Route path="/chat-1/" element={<ChatWebSocket
+                    senderContentType={'cafe_branch'}
+                    senderObjectId={29}
+                    receiverContentType={'food_service_branch'}
+                    receiverObjectId={5}
+                />} />
+                <Route path="/chat-2/" element={<ChatWebSocket
+                    senderContentType={'food_service_branch'}
+                    senderObjectId={5}
+                    receiverContentType={'cafe_branch'}
+                    receiverObjectId={29}
+                />} />
+            </Routes>
+        </Router>
+    );
+};
 
 export default App;
